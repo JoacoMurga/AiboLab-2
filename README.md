@@ -23,12 +23,14 @@ día, la confirmación de las tomas y las tareas, y la red de personas que acomp
 
 ## Features
 
-| # | Feature 
+| # | Feature | Estado |
+|---|---------|--------|
+| 1 | Consultar la agenda de cuidado del día |  Implementada | 
+| 2 | Filtrar la agenda por tipo (medicación, tareas, actividades) |  Pendiente |
+| 3 | Consultar el detalle de un recordatorio | Pendiente |
+| 4 | Confirmar la toma de una medicación o tarea | Pendiente | 
 
-| 1 | Consultar la agenda de cuidado del día | Implementada 
-| 2 | Filtrar la agenda por tipo (medicación, tareas, actividades) | Pendiente 
-| 3 | Consultar el detalle de un recordatorio | Pendiente 
-| 4 | Confirmar la toma de una medicación o tarea | Pendiente
+**Estados:**  implementada ·  en desarrollo ·  pendiente
 
 
 El listado se actualiza a medida que avanza el proyecto.
