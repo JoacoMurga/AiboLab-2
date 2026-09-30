@@ -32,11 +32,6 @@ día, la confirmación de las tomas y las tareas, y la red de personas que acomp
 
 El listado se actualiza a medida que avanza el proyecto.
 
-## Estado actual
-
-**Unidad I:** pantalla principal con la agenda de cuidado del día y la red de cuidado,
-construida sobre datos estáticos.
-
 ## Tecnologías
 
 - React Native + Expo (SDK 53)
