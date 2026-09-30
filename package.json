@@ -10,12 +10,15 @@
   },
   "dependencies": {
     "@expo/metro-runtime": "~5.0.5",
+    "@tanstack/react-query": "^5.104.0",
     "expo": "~53.0.27",
+    "expo-linear-gradient": "~14.1.5",
     "expo-status-bar": "~2.2.3",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.6",
-    "react-native-web": "^0.20.0"
+    "react-native-web": "^0.20.0",
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

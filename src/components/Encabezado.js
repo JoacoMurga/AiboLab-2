@@ -1,11 +1,19 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 // Encabezado de la pantalla principal.
 // La marca queda fija porque es la identidad de la app, pero el saludo,
 // la fecha y la foto llegan por props.
 export default function Encabezado({ nombre, fecha, foto }) {
   return (
-    <View style={styles.contenedor}>
+    // El fondo es un degradado del gris de la marca hacia un tono turquesa
+    // oscuro. Es oscuro en toda su extensión para que el texto blanco se lea bien.
+    <LinearGradient
+      colors={['#3E484E', '#2F5E62']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.contenedor}
+    >
       <View style={styles.marca}>
         <Text style={styles.marcaTexto}>AIBO</Text>
         <View style={styles.punto} />
@@ -19,13 +27,12 @@ export default function Encabezado({ nombre, fecha, foto }) {
           <Text style={styles.fecha}>{fecha}</Text>
         </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   contenedor: {
-    backgroundColor: '#3E484E',
     paddingHorizontal: 20,
     paddingTop: 20,
     paddingBottom: 32,
@@ -50,7 +57,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   lema: {
-    color: '#A7B4B9',
+    color: '#C9D4D8',
     fontSize: 13,
     letterSpacing: 1,
   },
@@ -75,7 +82,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   fecha: {
-    color: '#A7B4B9',
+    color: '#C9D4D8',
     fontSize: 15,
     marginTop: 2,
   },
