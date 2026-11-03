@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'expo-router';
 
 import ContactoCuidado from '../components/ContactoCuidado';
 import Encabezado from '../components/Encabezado';
@@ -22,26 +23,25 @@ import { useFiltroStore } from '../store/useFiltroStore';
 const URL_PROYECTO = 'https://github.com/JoacoMurga/AiboLab-2';
 
 export default function PantallaPrincipal() {
-  // useQuery pide la agenda y nos da los tres estados: cargando, error y datos.
-  // "agenda" es la clave con la que TanStack Query guarda la respuesta en caché.
+  // agenda con TanStack Query
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['agenda'],
     queryFn: obtenerAgenda,
   });
 
-  // El filtro elegido lo leemos del store global de Zustand.
+  const router = useRouter();
+
+  // filtro (Zustand)
   const tipoSeleccionado = useFiltroStore((estado) => estado.tipoSeleccionado);
 
-  // Mientras no llegan los datos usamos una lista vacía para no romper los cálculos.
   const agenda = data || [];
 
-  // El resumen cuenta siempre sobre la agenda completa, no sobre la filtrada.
+  // resumen con la agenda completa, no la filtrada
   const confirmadas = agenda.filter((item) => item.estado === 'confirmada').length;
   const pendientes = agenda.filter((item) => item.estado === 'pendiente').length;
   const sinConfirmar = agenda.filter((item) => item.estado === 'omitida').length;
 
-  // Si todavía no hay datos mostramos un guion en vez de un 0,
-  // para no dar a entender que no hay nada pendiente.
+  // mientras carga mostramos '–' y no 0
   const hayDatos = !isLoading && !error;
 
   const agendaFiltrada =
@@ -49,7 +49,7 @@ export default function PantallaPrincipal() {
       ? agenda
       : agenda.filter((item) => item.tipo === tipoSeleccionado);
 
-  // Lo que se ve arriba de la lista: encabezado, resumen, título y filtros.
+  // --- CABECERA ---
   const cabecera = (
     <View>
       <Encabezado nombre={persona.nombre} fecha="Jueves 3 de septiembre" foto={persona.foto} />
@@ -70,8 +70,7 @@ export default function PantallaPrincipal() {
     </View>
   );
 
-  // Lo que se ve cuando la lista no tiene elementos. Puede ser porque
-  // todavía está cargando, porque hubo un error o porque el filtro no trae nada.
+  // --- LISTA VACIA (cargando / error / sin resultados) ---
   let listaVacia;
   if (isLoading) {
     listaVacia = (
@@ -97,7 +96,7 @@ export default function PantallaPrincipal() {
     );
   }
 
-  // Lo que se ve debajo de la lista: la red de cuidado y el pie.
+  // --- PIE ---
   const pie = (
     <View>
       <View style={styles.seccion}>
@@ -107,7 +106,6 @@ export default function PantallaPrincipal() {
         </Text>
       </View>
 
-      {/* La red de cuidado son pocas personas, así que alcanza con un ScrollView horizontal. */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -124,17 +122,15 @@ export default function PantallaPrincipal() {
         ))}
       </ScrollView>
 
-      {/* Linking abre el enlace en el navegador del sistema, fuera de la app. */}
       <Pressable onPress={() => Linking.openURL(URL_PROYECTO)} accessibilityRole="link">
         <Text style={styles.enlace}>Conocé más sobre el proyecto AIBO</Text>
       </Pressable>
 
-      <Text style={styles.pie}>Versión 0.2 · Agenda cargada desde la red</Text>
+      <Text style={styles.pie}>Versión 0.3 · Agenda cargada desde la red</Text>
     </View>
   );
 
-  // Toda la pantalla es una FlatList: la agenda va en el medio y el resto
-  // en la cabecera y el pie. Así evitamos meter una FlatList dentro de un ScrollView.
+  // todo es una FlatList para no tener FlatList adentro de un ScrollView
   return (
     <FlatList
       data={agendaFiltrada}
@@ -149,6 +145,7 @@ export default function PantallaPrincipal() {
             estado={item.estado}
             responsableNombre={item.responsableNombre}
             responsableFoto={item.responsableFoto}
+            onPress={() => router.push(`/recordatorio/${item.id}`)}
           />
         </View>
       )}

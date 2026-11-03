@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useFiltroStore } from '../store/useFiltroStore';
 
-// Opciones del filtro. La clave coincide con el campo "tipo" de la agenda.
+// la clave es igual al campo "tipo" del JSON
 const opciones = [
   { clave: 'todos', texto: 'Todo' },
   { clave: 'medicacion', texto: 'Medicación' },
@@ -9,11 +9,8 @@ const opciones = [
   { clave: 'actividad', texto: 'Actividades' },
 ];
 
-// Botones para filtrar la agenda por tipo.
-// No recibe props: lee y cambia el filtro directamente en el store de Zustand.
+// Botones de filtro, usa el store de Zustand (sin props)
 export default function FiltroTipo() {
-  // Tomamos solo lo que usamos, así el componente se vuelve a dibujar
-  // únicamente cuando cambia este valor.
   const tipoSeleccionado = useFiltroStore((estado) => estado.tipoSeleccionado);
   const cambiarTipo = useFiltroStore((estado) => estado.cambiarTipo);
 
@@ -30,7 +27,7 @@ export default function FiltroTipo() {
             accessibilityState={{ selected: activo }}
             style={[styles.boton, activo && styles.botonActivo]}
           >
-            {/* El tilde indica cuál está elegido sin depender solo del color. */}
+            {/* el tilde para no depender solo del color */}
             <Text style={[styles.texto, activo && styles.textoActivo]}>
               {activo ? '✓ ' : ''}
               {opcion.texto}

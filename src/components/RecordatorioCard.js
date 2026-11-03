@@ -1,11 +1,8 @@
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import Etiqueta from './Etiqueta';
 
-// Este es el componente reutilizable principal del proyecto.
-// Representa un punto de la agenda de cuidado del día: una toma de
-// medicación, una tarea del cuidador o una actividad.
-// Recibe todos los datos por props y adentro usa otro componente
-// nuestro (Etiqueta), al que también le pasa props.
+// Tarjeta de un recordatorio de la agenda (medicacion, tarea o actividad)
+// onPress viene de la pantalla
 export default function RecordatorioCard({
   hora,
   tipo,
@@ -14,12 +11,18 @@ export default function RecordatorioCard({
   estado,
   responsableNombre,
   responsableFoto,
+  onPress,
 }) {
   const textoTipo = textosPorTipo[tipo] || 'Recordatorio';
   const estadoMostrado = estados[estado] || estados.pendiente;
 
   return (
-    <View style={styles.tarjeta}>
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={`${titulo}, ${hora}. Ver detalle`}
+      style={({ pressed }) => [styles.tarjeta, pressed && styles.tarjetaPresionada]}
+    >
       <View style={styles.fila}>
         <View style={styles.horaBloque}>
           <Text style={styles.hora}>{hora}</Text>
@@ -39,19 +42,20 @@ export default function RecordatorioCard({
       <View style={styles.responsable}>
         <Image style={styles.avatar} source={{ uri: responsableFoto }} />
         <Text style={styles.responsableTexto}>A cargo de {responsableNombre}</Text>
+        <Text style={styles.verDetalle}>Ver detalle ›</Text>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
-// Traducciones de los valores que vienen en los datos a lo que ve el usuario.
-const textosPorTipo = {
+// textos para mostrar (se usan tambien en el detalle)
+export const textosPorTipo = {
   medicacion: 'Medicación',
   tarea: 'Tarea de cuidado',
   actividad: 'Actividad',
 };
 
-const estados = {
+export const estados = {
   confirmada: { texto: 'Confirmada', color: 'ok' },
   pendiente: { texto: 'Pendiente', color: 'pendiente' },
   omitida: { texto: 'Sin confirmar', color: 'alerta' },
@@ -65,6 +69,9 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     borderWidth: 1,
     borderColor: '#E1E7E8',
+  },
+  tarjetaPresionada: {
+    backgroundColor: '#EFF5F5',
   },
   fila: {
     flexDirection: 'row',
@@ -121,8 +128,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#E6EBEC',
   },
   responsableTexto: {
+    flex: 1,
     marginLeft: 10,
     fontSize: 14,
     color: '#6B787E',
+  },
+  verDetalle: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#1F7B7B',
   },
 });

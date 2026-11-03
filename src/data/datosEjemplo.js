@@ -1,16 +1,13 @@
-// Datos estáticos de ejemplo.
-// La agenda del día ya no está acá: ahora se pide por red con TanStack Query
-// (ver src/servicios/agenda.js). Acá quedan los datos que casi no cambian
-// durante el día: la persona y su red de cuidado.
+// Datos de ejemplo (la agenda ahora viene de api/agenda.json)
 
-// Persona acompañada por la red de cuidado.
+// Persona acompañada
 export const persona = {
   nombre: 'Elsa',
   apellido: 'Ferreyra',
   foto: 'https://ui-avatars.com/api/?name=Elsa+Ferreyra&background=2A9D9D&color=fff&size=160&bold=true',
 };
 
-// Integrantes de la red de cuidado de la persona.
+// Red de cuidado
 export const redDeCuidado = [
   {
     id: 1,

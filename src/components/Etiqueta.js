@@ -1,8 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-// Etiqueta de estado. Es el componente más chico del proyecto y lo usamos
-// dentro de otros componentes. Recibe por props el texto y el tipo, y el
-// tipo define los colores.
+// Etiqueta de estado, el tipo define los colores
 export default function Etiqueta({ texto, tipo = 'neutro' }) {
   const colores = coloresPorTipo[tipo] || coloresPorTipo.neutro;
 
@@ -28,8 +26,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
   },
   texto: {
-    // Texto un poco más grande de lo habitual: el público de AIBO son
-    // adultos mayores y la accesibilidad visual es un requisito del proyecto.
+    // letra mas grande por accesibilidad
     fontSize: 14,
     fontWeight: '600',
   },

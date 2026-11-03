@@ -27,29 +27,30 @@ día, la confirmación de las tomas y las tareas, y la red de personas que acomp
 |---|---------|--------|
 | 1 | Consultar la agenda de cuidado del día | Implementada |
 | 2 | Filtrar la agenda por tipo (medicación, tareas, actividades) | Implementada |
-| 3 | Consultar el detalle de un recordatorio | Pendiente |
+| 3 | Consultar el detalle de un recordatorio | Implementada |
 | 4 | Confirmar la toma de una medicación o tarea | Pendiente |
 
 El listado se actualiza a medida que avanza el proyecto.
 
-## Estado actual
-
-**Unidad I:** pantalla principal con la agenda de cuidado del día y la red de cuidado,
-construida sobre datos estáticos.
-
 ## Tecnologías
 
-- React Native + Expo (SDK 53)
+- React Native + Expo (SDK 58)
 - JavaScript
 - StyleSheet
 - TanStack Query (`@tanstack/react-query`)
 - Zustand
 - expo-linear-gradient
+- Expo Router
+- expo-image-picker
 
 ## Estructura del proyecto
 
 ```
-├── App.js                          # Providers (TanStack Query) y pantalla principal
+├── app
+│   ├── _layout.js                  # Stack y Provider de TanStack Query
+│   ├── index.js                    # Pantalla principal
+│   └── recordatorio
+│       └── [id].js                 # Detalle de un recordatorio (ruta dinámica)
 ├── api
 │   └── agenda.json                 # "API" simulada: agenda del día
 └── src
@@ -67,7 +68,8 @@ construida sobre datos estáticos.
     ├── servicios
     │   └── agenda.js               # fetch de la agenda
     └── store
-        └── useFiltroStore.js       # Store global de Zustand para el filtro
+        ├── useFiltroStore.js       # Store global de Zustand para el filtro
+        └── useFotosStore.js        # Store global de Zustand para las fotos
 ```
 
 ## Cómo ejecutar el proyecto
@@ -77,5 +79,5 @@ npm install
 npx expo start
 ```
 
-Después se presiona `w` para abrirlo en el navegador. (El Expo Go de las tiendas ya
-no corre SDK 53, por eso lo probamos en la web.)
+Después se presiona `w` para abrirlo en el navegador, o se escanea el código QR con
+Expo Go desde el celular (hay que iniciar sesión con `npx expo login`).

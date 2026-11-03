@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-// Tarjeta chica con un número y su etiqueta.
-// La usamos tres veces en la pantalla principal cambiando solo las props.
+// Tarjeta del resumen (se usa 3 veces)
 export default function TarjetaResumen({ valor, etiqueta, acento = false }) {
   return (
     <View style={styles.contenedor}>

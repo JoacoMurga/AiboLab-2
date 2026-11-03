@@ -1,8 +1,7 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import Etiqueta from './Etiqueta';
 
-// Tarjeta de un integrante de la red de cuidado.
-// La mostramos en un listado horizontal, así que tiene un ancho fijo.
+// Integrante de la red de cuidado (ancho fijo para la lista horizontal)
 export default function ContactoCuidado({ nombre, rol, foto, disponible }) {
   return (
     <View style={styles.tarjeta}>

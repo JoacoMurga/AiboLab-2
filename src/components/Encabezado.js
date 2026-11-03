@@ -1,13 +1,10 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-// Encabezado de la pantalla principal.
-// La marca queda fija porque es la identidad de la app, pero el saludo,
-// la fecha y la foto llegan por props.
+// Encabezado: marca, saludo, fecha y foto (por props)
 export default function Encabezado({ nombre, fecha, foto }) {
   return (
-    // El fondo es un degradado del gris de la marca hacia un tono turquesa
-    // oscuro. Es oscuro en toda su extensión para que el texto blanco se lea bien.
+    // degradado oscuro para que se lea el texto blanco
     <LinearGradient
       colors={['#3E484E', '#2F5E62']}
       start={{ x: 0, y: 0 }}
